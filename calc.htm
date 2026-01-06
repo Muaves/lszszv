@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Muavees - Kalkulátorú</title>
+</head>
+<body style="padding: 20px; font-family: Arial;">
+  <h2>Kalkulátor</h2>
+  <div id="display" style="border: 1px solid black; padding: 10px; margin-bottom: 10px; width: 220px; text-align: right; font-size: 24px; background-color: #eee;">0</div>
+  <div>
+    <button onclick="addNum('1')" style="width:50px;height:50px;font-size:18px;margin:2px;">1</button>
+    <button onclick="addNum('2')" style="width:50px;height:50px;font-size:18px;margin:2px;">2</button>
+    <button onclick="addNum('3')" style="width:50px;height:50px;font-size:18px;margin:2px;">3</button>
+    <button onclick="setOp('+')" style="width:50px;height:50px;font-size:18px;margin:2px;">+</button>
+  </div>
+  <div>
+    <button onclick="addNum('4')" style="width:50px;height:50px;font-size:18px;margin:2px;">4</button>
+    <button onclick="addNum('5')" style="width:50px;height:50px;font-size:18px;margin:2px;">5</button>
+    <button onclick="addNum('6')" style="width:50px;height:50px;font-size:18px;margin:2px;">6</button>
+    <button onclick="setOp('-')" style="width:50px;height:50px;font-size:18px;margin:2px;">-</button>
+  </div>
+  <div>
+    <button onclick="addNum('7')" style="width:50px;height:50px;font-size:18px;margin:2px;">7</button>
+    <button onclick="addNum('8')" style="width:50px;height:50px;font-size:18px;margin:2px;">8</button>
+    <button onclick="addNum('9')" style="width:50px;height:50px;font-size:18px;margin:2px;">9</button>
+    <button onclick="calc()" style="width:50px;height:50px;font-size:18px;margin:2px;">=</button>
+  </div>
+  <div>
+    <button onclick="clearAll()" style="width:108px;height:50px;font-size:18px;margin:2px;">C</button>
+    <button onclick="addNum('0')" style="width:50px;height:50px;font-size:18px;margin:2px;">0</button>
+  </div>
+
+  <script>
+    var num1 = null;
+    var op = null;
+    var waiting = false;
+
+    function addNum(n) {
+        var d = document.getElementById('display');
+      var d = document.getElementById('display');
+      if (waiting) {
+        d.innerText = n;
+        waiting = false;
+      } else {
+        d.innerText = d.innerText === '0' ? n : d.innerText + n;
+      }
+    }
+
+    function setOp(o) {
+      num1 = parseFloat(document.getElementById('display').innerText);
+      op = o;
+      waiting = true;
+    }
+
+    function calc() {
+      if (num1 === null || op === null) return;
+      var num2 = parseFloat(document.getElementById('display').innerText);
+      var result = 0;
+      if (op === '+') result = num1 + num2;
+      if (op === '-') result = num1 - num2;
+      document.getElementById('display').innerText = result;
+      num1 = null;
+      op = null;
+    }
+
+    function clearAll() {
+      document.getElementById('display').innerText = '0';
+      num1 = null;
+      op = null;
+      waiting = false;
+    }
+  </script>
+  <h1><a href="https://redstone-launcher.com">legjobb launcher</a></h1>
+</body>
+</html>
