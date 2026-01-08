@@ -12,7 +12,7 @@ And then go into your folder:
 ```cd lszszv```
 
 and finally: 
-```xdg-open calc.htm```
+```xdg-open index.html```
 
 OR if you want to open it in an exact browser
 ```firefox calc.htm```
