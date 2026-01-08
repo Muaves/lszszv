@@ -1,11 +1,103 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <title>Muavees - Kalkulátorú</title>
 </head>
+<style>
+  :root{
+    --bg: #ffffff;
+    --text: #0a0a0a;
+    --muted: #333333;
+    --panel: #eeeeee;
+    --border: rgba(0,0,0,0.12);
+    --btn-bg: transparent;
+    --btn-border: rgba(0,0,0,0.12);
+  }
+
+  .theme-dark{
+    --bg: #0b0b0d;
+    --text: #f5f5f7;
+    --muted: #cfcfd1;
+    --panel: #121214;
+    --border: rgba(255,255,255,0.08);
+    --btn-bg: transparent;
+    --btn-border: rgba(255,255,255,0.08);
+  }
+
+  body{
+    background: var(--bg);
+    color: var(--text);
+    transition: background .2s ease, color .2s ease;
+  }
+
+  .expand-btn {
+    margin-top: 12px;
+    background: var(--btn-bg);
+    border: none;
+    color: var(--text);
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .expand-btn .arrow {
+    display: inline-block;
+    transition: transform 0.25s ease;
+  }
+
+  .blog-card.expanded .arrow {
+    transform: rotate(180deg);
+  }
+
+  .blog-card-more {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+    margin-top: 12px;
+    background: transparent;
+  }
+
+  .blog-card.expanded .blog-card-more {
+    max-height: 1000px;
+  }
+
+  .blog-card-more p {
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+
+  .more-img {
+    width: 100%;
+    max-width: 600px;
+    display: block;
+    margin: 8px 0;
+    border-radius: 8px;
+  }
+
+  #theme-toggle{
+    background: var(--btn-bg);
+    color: var(--text);
+    border: 1px solid var(--btn-border);
+    padding: 6px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+  }
+</style>
+
 <body style="padding: 20px; font-family: Arial;">
-  <h2>Kalkulátor</h2>
-  <div id="display" style="border: 1px solid black; padding: 10px; margin-bottom: 10px; width: 220px; text-align: right; font-size: 24px; background-color: #eee;">0</div>
+  <div style="display:flex;align-items:center;gap:12px;justify-content:space-between;">
+    <h2 style="margin:0;">Kalkulátor</h2>
+    <button id="theme-toggle" type="button" aria-pressed="false">Dark</button>
+  </div>
+  <div id="display"
+    style="border: 1px solid black; padding: 10px; margin-bottom: 10px; width: 220px; text-align: right; font-size: 24px; background-color: #eee;">
+    0</div>
+    /* Tudom hogy ezt megleehtett volna csinalni egy div-el de nekem igy jobban teccik :) */
   <div>
     <button onclick="addNum('1')" style="width:50px;height:50px;font-size:18px;margin:2px;">1</button>
     <button onclick="addNum('2')" style="width:50px;height:50px;font-size:18px;margin:2px;">2</button>
@@ -29,13 +121,42 @@
     <button onclick="addNum('0')" style="width:50px;height:50px;font-size:18px;margin:2px;">0</button>
   </div>
 
+  <p>Note: this calculator is a simple implementation and does not support advanced operations or any input longer then
+    2 elements (For ex.: 2+2+4 here it calculates the last 2 elements and it will calculate only the 2+4).</p>
+
+
+  <div class="blog-card">
+    <button type="button" class="expand-btn" aria-expanded="false" aria-controls="more-1" data-target="more-1">
+      <span>Show <b>installation</b></span>
+      <span class="arrow" aria-hidden="true">▼</span>
+    </button>
+    <div class="blog-card-more" id="more-1" role="region" aria-hidden="true">
+      <p><b>･</b> To use it just run:</p>
+      <p><b>git clone https://github.com/Muaves/lszszv</b></p>
+      <br>
+      <p>And then go into your folder:</p>
+      <p><b>cd lszszv</b></p>
+      <br>
+      <p>And finally:</p>
+      <p><b>xdg-open calc.htm</b></p>
+      <br>
+      <br>
+      <p>You can get more information or download it manually in the <a href="https://github.com/Muaves/lszszv">GitHub
+          repository</a>.</p>
+<br>
+<br>
+<p><b>Note: The calculator under 260px x 483px screen width/height is useless.</b></p>
+    </div>
+  </div>
+
+
   <script>
     var num1 = null;
     var op = null;
     var waiting = false;
 
     function addNum(n) {
-        var d = document.getElementById('display');
+      var d = document.getElementById('display');
       var d = document.getElementById('display');
       if (waiting) {
         d.innerText = n;
@@ -69,9 +190,75 @@
       waiting = false;
     }
   </script>
+  <script>
+    document.addEventListener('click', function (e) {
+      var btn = e.target.closest('.expand-btn');
+      if (!btn) return;
+      var targetId = btn.getAttribute('data-target');
+      var more = document.getElementById(targetId);
+      var card = btn.closest('.blog-card');
+      var expanded = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!expanded));
+      if (more) {
+        more.setAttribute('aria-hidden', String(!expanded));
+      }
+      if (card) {
+        card.classList.toggle('expanded', !expanded);
+      }
+      var label = btn.querySelector('span:first-child');
+      if (label) {
+        label.textContent = !expanded ? 'Show less' : 'Show installation';
+      }
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        var active = document.activeElement;
+        if (active && active.classList.contains('expand-btn')) {
+          active.click();
+          e.preventDefault();
+        }
+      }
+    });
+
+    (function(){
+      var toggle = document.getElementById('theme-toggle');
+      var darkClass = 'theme-dark';
+      function applyTheme(theme){
+        if(theme === 'dark'){
+          document.body.classList.add(darkClass);
+          if(toggle) toggle.textContent = 'Light';
+          if(toggle) toggle.setAttribute('aria-pressed', 'true');
+        } else {
+          document.body.classList.remove(darkClass);
+          if(toggle) toggle.textContent = 'Dark';
+          if(toggle) toggle.setAttribute('aria-pressed', 'false');
+        }
+      }
+      try{
+        var saved = localStorage.getItem('theme');
+      }catch(e){ var saved = null; }
+      if(!saved){
+        var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        saved = prefersDark ? 'dark' : 'light';
+      }
+      applyTheme(saved);
+      if(toggle){
+        toggle.addEventListener('click', function(){
+          var current = document.body.classList.contains(darkClass) ? 'dark' : 'light';
+          var next = current === 'dark' ? 'light' : 'dark';
+          applyTheme(next);
+          try{ localStorage.setItem('theme', next); }catch(e){}
+        });
+      }
+    })();
+  </script>
+
   <h1><a href="https://redstone-launcher.com">legjobb launcher</a></h1>
   <footer style="text-align: center; padding: 12px 0; color: #050505; font-size: 14px;">
-  © 2026 Muavees. All rights reserved.
-</footer>
+    <p>© 2026 Muavees. All rights reserved.</p>
+  </footer>
+
 </body>
+
 </html>
