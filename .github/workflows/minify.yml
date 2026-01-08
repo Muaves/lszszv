@@ -1,0 +1,34 @@
+name: Minify index.html
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  minify:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install html-minifier
+        run: npm install -g html-minifier-terser
+
+      - name: Minify inline HTML + CSS + JS
+        run: |
+          html-minifier-terser index.html \
+            --collapse-whitespace \
+            --remove-comments \
+            --remove-redundant-attributes \
+            --remove-script-type-attributes \
+            --remove-style-link-type-attributes \
+            --minify-css true \
+            --minify-js true \
+            -o index.html
+
+      - name: Commit minified file
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git commit -am "auto: minify index.html" || echo "No changes"
+          git push
