@@ -18,6 +18,8 @@ OR if you want to open it in an exact browser
 ```firefox calc.htm```
 ```(your browsers name here) calc.htm```
 
+<b> If you have problem to clone the repo create an issue </b>
+
 ---------------------------------------------------------------------------------------------------------------------------------------
 
 If you want to download it manually (better for windows):
