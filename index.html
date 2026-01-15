@@ -2,39 +2,37 @@
 <html lang="en">
 
 <head>
-<title>Muavees - Kalkulátor</title>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="theme-color" content="#000000">
-  <meta
-  name="description"
-  content="A simple Calculator built by Muavees">
+  <title>Muavees - Kalkulátor</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="theme-color" content="#000000">
+  <meta name="description" content="A simple Calculator built by Muavees">
   <meta property="og:title" content="Lszszv">
   <meta name="author" content="Muavees">
 </head>
 <style>
-  :root{
+  :root {
     --bg: #ffffff;
     --text: #0a0a0a;
     --muted: #333333;
     --panel: #eeeeee;
-    --border: rgba(0,0,0,0.12);
+    --border: rgba(0, 0, 0, 0.12);
     --btn-bg: transparent;
-    --btn-border: rgba(0,0,0,0.12);
+    --btn-border: rgba(0, 0, 0, 0.12);
   }
 
-  .theme-dark{
+  .theme-dark {
     --bg: #000000;
     --text: #fffcfc;
     --muted: #ffffff;
     --panel: #121214;
-    --border: rgba(255,255,255,0.08);
+    --border: rgba(255, 255, 255, 0.08);
     --btn-bg: transparent;
-    --btn-border: rgba(255,255,255,0.08);
+    --btn-border: rgba(255, 255, 255, 0.08);
   }
 
-  body{
+  body {
     background: var(--bg);
     color: var(--text);
     transition: background .2s ease, color .2s ease;
@@ -87,7 +85,7 @@
     border-radius: 8px;
   }
 
-  #theme-toggle{
+  #theme-toggle {
     background: var(--btn-bg);
     color: var(--text);
     border: 1px solid var(--btn-border);
@@ -129,7 +127,7 @@
     <button onclick="addNum('0')" style="width:50px;height:50px;font-size:18px;margin:2px;">0</button>
   </div>
 
-  <p>Note: this calculator is a simple implementation and does not support advanced operations or any input longer then
+  <p style="width: 600px;">Note: this calculator is a simple implementation and does not support advanced operations or any input longer then
     2 elements (For ex.: 2+2+4 here it calculates the last 2 elements and it will calculate only the 2+4).</p>
 
 
@@ -139,21 +137,15 @@
       <span class="arrow" aria-hidden="true">▼</span>
     </button>
     <div class="blog-card-more" id="more-1" role="region" aria-hidden="true">
-      <p><b>･</b> To use it just run:</p>
-      <p><b>git clone https://github.com/Muaves/lszszv</b></p>
+      <p>Installation</p>
+      <p>To use it just go to the new webapp 🔥 (you are here yayy!)</p>
       <br>
-      <p>And then go into your folder:</p>
-      <p><b>cd lszszv</b></p>
-      <br>
-      <p>And finally:</p>
-      <p><b>xdg-open calc.htm</b></p>
-      <br>
-      <br>
-      <p>You can get more information or download it manually in the <a href="https://github.com/Muaves/lszszv">GitHub
+      <p>You can get more information or download the latest release in the <a href="https://github.com/Muaves/lszszv">GitHub
           repository</a>.</p>
-<br>
-<br>
-<p><b>Note: The calculator under 260px x 483px screen width/height is useless.</b></p>
+      <br>
+      <br>
+      <p><b>Note: The calculator under 260px x 483px screen width/height is useless.</b></p>
+      <p>Copyright in the light theme</p>
     </div>
   </div>
 
@@ -229,40 +221,40 @@
       }
     });
 
-    (function(){
+    (function () {
       var toggle = document.getElementById('theme-toggle');
       var darkClass = 'theme-dark';
-      function applyTheme(theme){
-        if(theme === 'dark'){
+      function applyTheme(theme) {
+        if (theme === 'dark') {
           document.body.classList.add(darkClass);
-          if(toggle) toggle.textContent = 'Light';
-          if(toggle) toggle.setAttribute('aria-pressed', 'true');
+          if (toggle) toggle.textContent = 'Light';
+          if (toggle) toggle.setAttribute('aria-pressed', 'true');
         } else {
           document.body.classList.remove(darkClass);
-          if(toggle) toggle.textContent = 'Dark';
-          if(toggle) toggle.setAttribute('aria-pressed', 'false');
+          if (toggle) toggle.textContent = 'Dark';
+          if (toggle) toggle.setAttribute('aria-pressed', 'false');
         }
       }
-      try{
+      try {
         var saved = localStorage.getItem('theme');
-      }catch(e){ var saved = null; }
-      if(!saved){
+      } catch (e) { var saved = null; }
+      if (!saved) {
         var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
         saved = prefersDark ? 'dark' : 'light';
       }
       applyTheme(saved);
-      if(toggle){
-        toggle.addEventListener('click', function(){
+      if (toggle) {
+        toggle.addEventListener('click', function () {
           var current = document.body.classList.contains(darkClass) ? 'dark' : 'light';
           var next = current === 'dark' ? 'light' : 'dark';
           applyTheme(next);
-          try{ localStorage.setItem('theme', next); }catch(e){}
+          try { localStorage.setItem('theme', next); } catch (e) { }
         });
       }
     })();
   </script>
 
-<h1><a href="https://redstone-launcher.com">legjobb launcher</a></h1>
+  <h1><a href="https://redstone-launcher.com">legjobb launcher</a></h1>
   <footer style="text-align: center; padding: 12px 0; color: #050505; font-size: 14px;">
     <p>© 2026 Muavees. All rights reserved.</p>
   </footer>
