@@ -9,6 +9,8 @@
   <meta name="theme-color" content="#000000">
   <meta name="description" content="A simple Calculator built by Muavees">
   <meta property="og:title" content="Lszszv">
+  <meta property="og:description" content="A simple Calculator made by Muavees">
+  <meta property="og:Version" content="1.1.4">
   <meta name="author" content="Muavees">
 </head>
 <style>
@@ -20,22 +22,26 @@
     --border: rgba(0, 0, 0, 0.12);
     --btn-bg: transparent;
     --btn-border: rgba(0, 0, 0, 0.12);
+    --panelbg: #e2dada;
   }
 
   .theme-dark {
     --bg: #000000;
     --text: #fffcfc;
     --muted: #ffffff;
-    --panel: #121214;
+    --panel: #f4f4f4;
     --border: rgba(255, 255, 255, 0.08);
     --btn-bg: transparent;
     --btn-border: rgba(255, 255, 255, 0.08);
+    --panelbg: #2d1515ab;
   }
 
   body {
     background: var(--bg);
     color: var(--text);
     transition: background .2s ease, color .2s ease;
+    text-align: center;
+    justify-content: center;
   }
 
   .expand-btn {
@@ -77,6 +83,61 @@
     margin-bottom: 8px;
   }
 
+  .button {
+    position: relative;
+    display: inline-block;
+    margin: 20px;
+  }
+
+  .button a {
+    color: white;
+    font-family: Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 36px;
+    text-align: center;
+    text-decoration: none;
+    background-color: #FFA12B;
+    display: block;
+    position: relative;
+    padding: 20px 40px;
+
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    text-shadow: 0px 1px 0px #000;
+    filter: dropshadow(color=#000, offx=0px, offy=1px);
+
+    -webkit-box-shadow: inset 0 1px 0 #FFE5C4, 0 10px 0 #915100;
+    -moz-box-shadow: inset 0 1px 0 #FFE5C4, 0 10px 0 #915100;
+    box-shadow: inset 0 1px 0 #FFE5C4, 0 10px 0 #915100;
+
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+  }
+
+  .button a:active {
+    top: 10px;
+    background-color: #F78900;
+
+    -webkit-box-shadow: inset 0 1px 0 #FFE5C4, inset 0 -3px 0 #915100;
+    -moz-box-shadow: inset 0 1px 0 #FFE5C4, inset 0 -3pxpx 0 #915100;
+    box-shadow: inset 0 1px 0 #FFE5C4, inset 0 -3px 0 #915100;
+  }
+
+  .button:after {
+    content: "";
+    height: 100%;
+    width: 100%;
+    padding: 4px;
+    position: absolute;
+    bottom: -15px;
+    left: -4px;
+    z-index: -1;
+    background-color: #2B1800;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+  }
+
   .more-img {
     width: 100%;
     max-width: 600px;
@@ -94,58 +155,111 @@
     cursor: pointer;
     font-weight: 600;
   }
+
+  .center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .calc {
+    transform-style: preserve-3d;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    padding: 12px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition-duration: 0.3s;
+  }
+
+  .calc:hover {
+    transition-duration: 0.3s;
+    transform: scale(1.1);
+  }
+
+  .calc:active {
+    transition-duration: 0.2s;
+    transform: scale(0.9);
+    background-color: rgb(240, 231, 214);
+  }
+
+  .display {
+    transform-style: preserve-3d;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    padding: 12px;
+    border-radius: 20px;
+    transition-duration: 0.3s;
+  }
+
+  .panel {
+    background-color: var(--panelbg);
+    padding: 20px;
+    border-radius: 20px;
+  }
+
 </style>
 
 <body style="padding: 20px; font-family: Arial;">
-  <div style="display:flex;align-items:center;gap:12px;justify-content:space-between;">
-    <h2 style="margin:0;">Kalkulátor</h2>
+  <div style="display:flex; align-items:center; gap:12px; justify-content:end;">
     <button id="theme-toggle" type="button" aria-pressed="false">Dark</button>
   </div>
-  <div id="display"
-    style=" color: #000000; border: 1px solid black; padding: 10px; margin-bottom: 10px; width: 220px; text-align: right; font-size: 24px; background-color: #fffefe;">
-    0</div>
-  <div>
-    <button onclick="addNum('1')" style="width:50px;height:50px;font-size:18px;margin:2px;">1</button>
-    <button onclick="addNum('2')" style="width:50px;height:50px;font-size:18px;margin:2px;">2</button>
-    <button onclick="addNum('3')" style="width:50px;height:50px;font-size:18px;margin:2px;">3</button>
-    <button onclick="setOp('+')" style="width:50px;height:50px;font-size:18px;margin:2px;">+</button>
-  </div>
-  <div>
-    <button onclick="addNum('4')" style="width:50px;height:50px;font-size:18px;margin:2px;">4</button>
-    <button onclick="addNum('5')" style="width:50px;height:50px;font-size:18px;margin:2px;">5</button>
-    <button onclick="addNum('6')" style="width:50px;height:50px;font-size:18px;margin:2px;">6</button>
-    <button onclick="setOp('-')" style="width:50px;height:50px;font-size:18px;margin:2px;">-</button>
-  </div>
-  <div>
-    <button onclick="addNum('7')" style="width:50px;height:50px;font-size:18px;margin:2px;">7</button>
-    <button onclick="addNum('8')" style="width:50px;height:50px;font-size:18px;margin:2px;">8</button>
-    <button onclick="addNum('9')" style="width:50px;height:50px;font-size:18px;margin:2px;">9</button>
-    <button onclick="calc()" style="width:50px;height:50px;font-size:18px;margin:2px;">=</button>
-  </div>
-  <div>
-    <button onclick="clearAll()" style="width:108px;height:50px;font-size:18px;margin:2px;">C</button>
-    <button onclick="addNum('0')" style="width:50px;height:50px;font-size:18px;margin:2px;">0</button>
-  </div>
+  <div class="center">
+    <div class="panel">
+      <div>
+        <h2 style="text-align: center; font: 15px; margin-top: 2px;">Lszszv</h2>
+        <p style="text-align: center; font-size: 14px; margin-bottom: 10px; margin-top: -13px;">Version 1.1.4</p>
 
-  <p style="width: 600px;">Note: this calculator is a simple implementation and does not support advanced operations or any input longer then
-    2 elements (For ex.: 2+2+4 here it calculates the last 2 elements and it will calculate only the 2+4).</p>
+      </div>
+
+      <div id="display" class="display"
+        style=" color: #000000; border: 1px solid black; padding: 10px; margin-bottom: 10px; width: 220px; text-align: right; font-size: 24px; background-color: #fffefe;">
+        0</div>
+      <div>
+        <button onclick="addNum('1')" style="width:50px;height:50px;font-size:18px;margin:2px;" class="calc">1</button>
+        <button onclick="addNum('2')" style="width:50px;height:50px;font-size:18px;margin:2px;" class="calc">2</button>
+        <button onclick="addNum('3')" style="width:50px;height:50px;font-size:18px;margin:2px;" class="calc">3</button>
+        <button onclick="setOp('+')" style="width:50px;height:50px;font-size:18px;margin:2px;" class="calc">+</button>
+      </div>
+      <div>
+        <button onclick="addNum('4')" style="width:50px;height:50px;font-size:18px;margin:2px;" class="calc">4</button>
+        <button onclick="addNum('5')" style="width:50px;height:50px;font-size:18px;margin:2px;" class="calc">5</button>
+        <button onclick="addNum('6')" style="width:50px;height:50px;font-size:18px;margin:2px;" class="calc">6</button>
+        <button onclick="setOp('-')" style="width:50px;height:50px;font-size:18px;margin:2px;" class="calc">-</button>
+      </div>
+      <div>
+        <button onclick="addNum('7')" style="width:50px;height:50px;font-size:18px;margin:2px;" class="calc">7</button>
+        <button onclick="addNum('8')" style="width:50px;height:50px;font-size:18px;margin:2px;" class="calc">8</button>
+        <button onclick="addNum('9')" style="width:50px;height:50px;font-size:18px;margin:2px;" class="calc">9</button>
+        <button onclick="calc()" style="width:50px;height:50px;font-size:18px;margin:2px;" class="calc">=</button>
+      </div>
+      <div>
+        <button onclick="clearAll()" style="width:108px;height:50px;font-size:18px;margin:2px;" class="calc">C</button>
+        <button onclick="addNum('0')" style="width:50px;height:50px;font-size:18px;margin:2px;" class="calc">0</button>
+      </div>
+    </div>
 
 
-  <div class="blog-card">
-    <button type="button" class="expand-btn" aria-expanded="false" aria-controls="more-1" data-target="more-1">
-      <span>Show <b>installation</b></span>
-      <span class="arrow" aria-hidden="true">▼</span>
-    </button>
-    <div class="blog-card-more" id="more-1" role="region" aria-hidden="true">
-      <p>Installation</p>
-      <p>To use it just go to the new webapp 🔥 (you are here yayy!)</p>
-      <br>
-      <p>You can get more information or download the latest release in the <a href="https://github.com/Muaves/lszszv">GitHub
-          repository</a>.</p>
-      <br>
-      <br>
-      <p><b>Note: The calculator under 260px x 483px screen width/height is useless.</b></p>
-      <p>Copyright in the light theme</p>
+
+
+    <div class="blog-card">
+      <button type="button" class="expand-btn" aria-expanded="false" aria-controls="more-1" data-target="more-1">
+        <span>Show <b>installation</b></span>
+        <span class="arrow" aria-hidden="true">▼</span>
+      </button>
+      <div class="blog-card-more" id="more-1" role="region" aria-hidden="true">
+        <p>Installation</p>
+        <p>To use it just go to the new webapp 🔥 (you are here yayy!)</p>
+        <br>
+        <p>You can get more information or download the latest release in the <a
+            href="https://github.com/Muaves/lszszv">GitHub
+            repository</a>.</p>
+        <br>
+        <br>
+        <p><b>Note: The calculator under 260px x 483px screen width/height is useless.</b></p>
+
+      </div>
     </div>
   </div>
 
@@ -252,10 +366,12 @@
         });
       }
     })();
+
+
   </script>
 
   <h1><a href="https://redstone-launcher.com">legjobb launcher</a></h1>
-  <footer style="text-align: center; padding: 12px 0; color: #050505; font-size: 14px;">
+  <footer style="text-align: center; padding: 12px 0; color: var(--text); font-size: 14px;">
     <p>© 2026 Muavees. All rights reserved.</p>
   </footer>
 
