@@ -13,7 +13,7 @@
   <meta property="og:Version" content="1.1.4">
   <meta name="author" content="Muavees">
 
-  <link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 </head>
 <style>
   :root {
@@ -47,7 +47,7 @@
   }
 
 
- 
+
 
   .expand-btn {
     margin-top: 12px;
@@ -225,8 +225,10 @@
   <div class="center">
     <div class="panel animate__animated animate__fadeInUp" style="max-width: 260px;">
       <div>
-        <h2 style="text-align: center; font: 15px; margin-top: 2px; animation-delay: 1.2s;" class="animate__animated animate__lightSpeedInRight">Lszszv</h2>
-        <p style="text-align: center; font-size: 14px; margin-bottom: 10px; margin-top: -13px; animation-duration: 0.8s; animation-delay: 2.5s;" class="animate__animated animate__pulse">Version 1.1.5</p>
+        <h2 style="text-align: center; font: 15px; margin-top: 2px; animation-delay: 1.2s;"
+          class="animate__animated animate__lightSpeedInRight">Lszszv</h2>
+        <p id="version" class="animate_animated animate_pulse">
+          Version loading...</p>
 
       </div>
 
@@ -258,28 +260,28 @@
     </div>
 
     <div class="animcenter">
-    <div class="blog-card">
-      <button type="button" class="expand-btn" aria-expanded="false" aria-controls="more-1" data-target="more-1">
-        <span>Show <b>installation</b></span>
-        <span aria-hidden="true">▼</span>
-      </button>
-      <div class="blog-card-more" id="more-1" role="region" aria-hidden="true">
-        <p>Installation</p>
-        <p>To use it just go to the new webapp 🔥 (you are here yayy!)</p>
-        <br>
-        <p>You can get more information or download the latest release in the <a
-            href="https://github.com/Muaves/lszszv">GitHub
-            repository</a>.</p>
-        <br>
-        <br>
-        <p><b>Note: The calculator under 260px x 483px screen width/height is useless.</b></p>
+      <div class="blog-card">
+        <button type="button" class="expand-btn" aria-expanded="false" aria-controls="more-1" data-target="more-1">
+          <span>Show <b>installation</b></span>
+          <span aria-hidden="true">▼</span>
+        </button>
+        <div class="blog-card-more" id="more-1" role="region" aria-hidden="true">
+          <p>Installation</p>
+          <p>To use it just go to the new webapp 🔥 (you are here yayy!)</p>
+          <br>
+          <p>You can get more information or download the latest release in the <a
+              href="https://github.com/Muaves/lszszv">GitHub
+              repository</a>.</p>
+          <br>
+          <br>
+          <p><b>Note: The calculator under 260px x 483px screen width/height is useless.</b></p>
 
+        </div>
       </div>
+      <footer style="text-align: center; padding: 12px 0; color: var(--text); font-size: 14px;">
+        <p>© 2026 Muavees. All rights reserved.</p>
+      </footer>
     </div>
-    <footer style="text-align: center; padding: 12px 0; color: var(--text); font-size: 14px;">
-      <p>© 2026 Muavees. All rights reserved.</p>
-    </footer>
-  </div>
   </div>
 
 
@@ -388,7 +390,17 @@
 
 
   </script>
-
+ <script>
+  fetch("version.txt?cache=" + Date.now())
+    .then(res => res.text())
+    .then(version => {
+      document.getElementById("version").textContent =
+        "Version " + version.trim();
+    })
+    .catch(() => {
+      document.getElementById("version").textContent = "Version ?";
+    });
+</script>
 
 
 </body>
