@@ -1,87 +1,96 @@
 # Lszszv
 
-Legszarabb számológép a világon - The worst calculator in the world
+> A browser-based calculator implemented in plain JavaScript to demonstrate fundamental UI patterns, state handling, and basic expression evaluation.
 
-> A small web-based calculator project made to practice JavaScript, UI animations, and basic UX patterns.
-> The goal is learning and experimentation, not mathematical perfection.
+## Description
 
-## Features
+Lszszv is a lightweight, client-side calculator application with no external dependencies beyond a CSS animation library.
+The project is designed as a learning exercise, prioritizing code clarity, predictable state transitions, and simple UX behavior.
 
-Basic arithmetic: addition, subtraction, multiplication, division
+## Key Features
 
-Multi-step calculations (example: 2 + 3 * 4)
+Arithmetic operations: addition, subtraction, multiplication, division
 
-Light / Dark theme with system preference detection
+Multi-term expression evaluation
 
-Smooth UI animations using animate.css
+Explicit state management for operands and operators
 
-Error handling for invalid results (NaN, Infinity)
+Light / dark theme switching with system preference detection
 
-Responsive layout (usable down to ~260px width)
+UI feedback through CSS-based animations
 
-UI-only hamburger menu (coming soon)
+Graceful handling of invalid and undefined results (NaN, Infinity)
 
-## Tech Stack
+Responsive layout with a defined minimum supported viewport
+
+Non-functional hamburger menu placeholder (UI scaffold) 🧩
+
+## Architecture
+
+Single-page application (SPA) without routing
+
+All logic executed client-side
+
+Stateless UI components with centralized calculation logic
+
+No framework abstractions
+
+## Technology Stack
 
 HTML5
 
-CSS3
+CSS3 (custom properties for theming)
 
-Vanilla JavaScript
+Vanilla JavaScript (ES6+)
 
-animate.css
+animate.css (visual feedback only)
 
-No frameworks, no build tools, no dependencies.
+## Execution
 
-## Usage
+Open index.html in any modern, standards-compliant browser.
+No build step, bundler, or runtime configuration is required.
 
-Open index.html in any modern browser.
-No installation or setup required.
+## Error Handling Strategy
 
-## Installation
-`git clone https://github.com/Muaves/lszszv.git`
-`cd lszszv`
+The calculator returns Error when:
 
+an evaluated expression results in NaN
 
-Then open index.html.
+the input cannot be parsed into a valid arithmetic expression
 
-## Error Handling
+The calculator returns ∞ when:
 
-The calculator displays Error when:
+a division by zero occurs
 
-the result is NaN
+These states are handled explicitly and do not crash the application.
 
-the expression is invalid
+## Constraints
 
-The calculator displays ∞ when:
+Designed for educational use
 
-division by zero occurs
+Not optimized for extreme edge cases
 
-## Known Limitations
+eval() is used intentionally to simplify expression evaluation
 
-Not designed for screens smaller than 260 × 483
+No persistence or advanced mathematical functions
 
-Uses eval() internally (educational purpose)
+## Intended Use
 
-No scientific functions
+This project is intended for:
 
-Hamburger menu is visual only
+Practicing JavaScript fundamentals
 
-## Project Purpose
+Understanding basic UI state management
 
-This project exists to:
+Experimenting with animation-driven feedback 🎯
 
-Learn JavaScript basics
+It is not intended for production deployment.
 
-Experiment with UI/UX and animations
+## License
 
-Keep everything simple and readable
-
-It is not intended to be a production-ready calculator.
-
+MIT License
 
 ## Author
 
 Muavees
 GitHub: https://github.com/Muaves
-Website: https://muaves.github.io
