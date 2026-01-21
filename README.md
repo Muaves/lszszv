@@ -39,8 +39,8 @@ Open index.html in any modern browser.
 No installation or setup required.
 
 ## Installation
-git clone https://github.com/Muaves/lszszv.git
-cd lszszv
+'git clone https://github.com/Muaves/lszszv.git'
+'cd lszszv'
 
 
 Then open index.html.
