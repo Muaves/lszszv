@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Muavees - Lszszv</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="theme-color" content="#000000">
+  <meta name="description" content="A simple Calculator built by Muavees">
+  <meta property="og:title" content="Lszszv">
+  <meta property="og:description" content="!!LSZSZV EXPERIMENTAL BETA!! Here you can get more visual info about my NEW UPDATES(look like IOS26)">
+  <meta property="og:Version" content="1.1.4">
+  <meta name="author" content="Muavees">
+  <link rel="shortcut icon" href="https://github.com/Muaves/lszszv/blob/main/img/lszsz_rounded_dark.png?raw=true" type="image/x-icon">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+</head>
+<style>
+  :root {
+    --bg: #ffffff;
+    --text: #0a0a0a;
+    --muted: #333333;
+    --panel: #eeeeee;
+    --border: rgba(0, 0, 0, 0.12);
+    --btn-bg: transparent;
+    --btn-border: rgba(0, 0, 0, 0.12);
+    --panelbg: #e2dada;
+  }
+
+  .theme-dark {
+    --bg: #000000;
+    --text: #fffcfc;
+    --muted: #ffffff;
+    --panel: #f4f4f4;
+    --border: rgba(255, 255, 255, 0.08);
+    --btn-bg: transparent;
+    --btn-border: rgba(255, 255, 255, 0.08);
+    --panelbg: #2d1515ab;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    text-align: center;
+    justify-content: center;
+    transition-duration: 0.5s;
+  }
+
+
+  .error {
+    color: red;
+
+  }
+
+  .shake {
+    animation: shake 0.3s ease;
+  }
+
+  @keyframes shake {
+    0% {
+      transform: translateX(0);
+    }
+
+    20% {
+      transform: translateX(-5px);
+    }
+
+    40% {
+      transform: translateX(5px);
+    }
+
+    60% {
+      transform: translateX(-5px);
+    }
+
+    80% {
+      transform: translateX(5px);
+    }
+
+    100% {
+      transform: translateX(0);
+    }
+  }
+
+
+  .expand-btn {
+    margin-top: 12px;
+    background: var(--btn-bg);
+    border: none;
+    color: var(--text);
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .expand-btn .arrow {
+    display: inline-block;
+    transition: transform 0.25s ease;
+  }
+
+  .blog-card.expanded .arrow {
+    transform: rotate(180deg);
+  }
+
+  .blog-card-more {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+    margin-top: 12px;
+    background: transparent;
+  }
+
+  .blog-card.expanded .blog-card-more {
+    max-height: 1000px;
+  }
+
+  .blog-card-more p {
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+
+  .button {
+    position: relative;
+    display: inline-block;
+    margin: 20px;
+  }
+
+  .button a {
+    color: white;
+    font-family: Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 36px;
+    text-align: center;
+    text-decoration: none;
+    background-color: #FFA12B;
+    display: block;
+    position: relative;
+    padding: 20px 40px;
+
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    text-shadow: 0px 1px 0px #000;
+    filter: dropshadow(color=#000, offx=0px, offy=1px);
+
+    -webkit-box-shadow: inset 0 1px 0 #FFE5C4, 0 10px 0 #915100;
+    -moz-box-shadow: inset 0 1px 0 #FFE5C4, 0 10px 0 #915100;
+    box-shadow: inset 0 1px 0 #FFE5C4, 0 10px 0 #915100;
+
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+  }
+
+  .button a:active {
+    top: 10px;
+    background-color: #F78900;
+
+    -webkit-box-shadow: inset 0 1px 0 #FFE5C4, inset 0 -3px 0 #915100;
+    -moz-box-shadow: inset 0 1px 0 #FFE5C4, inset 0 -3pxpx 0 #915100;
+    box-shadow: inset 0 1px 0 #FFE5C4, inset 0 -3px 0 #915100;
+  }
+
+  .button:after {
+    content: "";
+    height: 100%;
+    width: 100%;
+    padding: 4px;
+    position: absolute;
+    bottom: -15px;
+    left: -4px;
+    z-index: -1;
+    background-color: #2B1800;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+  }
+
+  .more-img {
+    width: 100%;
+    max-width: 600px;
+    display: block;
+    margin: 8px 0;
+    border-radius: 8px;
+  }
+
+  #theme-toggle {
+    background: var(--btn-bg);
+    color: var(--text);
+    border: 1px solid var(--btn-border);
+    padding: 6px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+  }
+
+  .center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    animation-duration: 2.4s;
+  }
+
+  .animcenter {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    animation-duration: 2.4s;
+    border-radius: 30px;
+    width: 600px;
+  }
+
+  .calc {
+    transform-style: preserve-3d;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    padding: 12px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    opacity: 1 !important;
+  }
+
+  .calc:hover {
+    transform: scale(1.1);
+  }
+
+  .calc.no-experimental:active {
+    transition-duration: 0.2s;
+    transform: scale(0.9);
+    background-color: rgb(240, 231, 214);
+    animation-duration: 0;
+  }
+
+  .calc.experimental {
+    transition-duration: 0.7s;
+  }
+
+  .display {
+    transform-style: preserve-3d;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    padding: 12px;
+    border-radius: 20px;
+    transition-duration: 0.3s;
+  }
+
+  #display {
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  .display.error {
+    color: #ff4d4d;
+    border-color: #ff4d4d;
+  }
+
+  .panel {
+    background-color: var(--panelbg);
+    padding: 20px;
+    border-radius: 20px;
+    animation-duration: 0.9s;
+  }
+
+
+
+  .hamburger {
+    position: fixed;
+    top: 12px;
+    left: 12px;
+    width: 24px;
+    height: 18px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    z-index: 9999;
+  }
+
+  .hamburger span {
+    display: block;
+    width: 100%;
+    height: 3px;
+    background: var(--text);
+    border-radius: 2px;
+    pointer-events: none;
+  }
+
+  .hamburger p {
+    position: absolute;
+    top: 22px;
+    left: -10px;
+    font-size: 10px;
+    color: var(--text);
+    opacity: 0;
+  }
+
+  .tooltip {
+    position: absolute;
+    left: 36px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--panel);
+    color: var(--text);
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 12px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+
+  .hamburger:hover .tooltip {
+    opacity: 1;
+    transform: translate(4px, -50%);
+  }
+</style>
+
+<body style="padding: 20px; font-family: Arial;">
+  <div class="hamburger">
+    <p>Coming soon</p>
+    <span></span>
+    <span></span>
+    <span></span>
+    <div class="tooltip" style="color: black;">Coming soon...</div>
+  </div>
+
+
+  <div style="display:flex; align-items:center; gap:12px; justify-content:end;">
+
+    <button id="theme-toggle" type="button" aria-pressed="false">☀️</button>
+  </div>
+  <div class="center">
+    <div class="panel animate__animated animate__fadeInUp" style="max-width: 260px;">
+      <div>
+        <h2 style="text-align: center; font: 15px; margin-top: 2px; animation-delay: 1.2s;"
+          class="animate__animated animate__lightSpeedInRight">Lszszv</h2>
+        <p style="text-align: center; font-size: 14px; margin-bottom: 10px; margin-top: -13px; animation-duration: 0.8s; animation-delay: 2.5s;"
+          class="animate__animated animate__pulse">Version 1.1.7</p>
+
+      </div>
+
+      <div id="display" class="display animate__animated animate__fadeInDown"
+        style=" color: #000000; border: 1px solid black; padding: 10px; margin-bottom: 10px; width: 220px; text-align: right; font-size: 24px; background-color: #fffefe;">
+        0</div>
+      <div>
+        <button onclick="addNum('1')" style="width:50px;height:50px;font-size:18px;margin:2px;" class="calc ">1</button>
+        <button onclick="addNum('2')" style="width:50px;height:50px;font-size:18px;margin:2px;" class="calc ">2</button>
+        <button onclick="addNum('3')" style="width:50px;height:50px;font-size:18px;margin:2px;" class="calc ">3</button>
+        <button onclick="handleOperator('+')" style="width:50px;height:50px;font-size:18px;margin:2px;"
+          class="calc ">+</button>
+      </div>
+      <div>
+        <button onclick="addNum('4')" style="width:50px;height:50px;font-size:18px;margin:2px;" class="calc ">4</button>
+        <button onclick="addNum('5')" style="width:50px;height:50px;font-size:18px;margin:2px;" class="calc ">5</button>
+        <button onclick="addNum('6')" style="width:50px;height:50px;font-size:18px;margin:2px;" class="calc ">6</button>
+        <button onclick="handleOperator('-')" style="width:50px;height:50px;font-size:18px;margin:2px;"
+          class="calc ">-</button>
+      </div>
+      <div>
+        <button onclick="addNum('7')" style="width:50px;height:50px;font-size:18px;margin:2px;" class="calc ">7</button>
+        <button onclick="addNum('8')" style="width:50px;height:50px;font-size:18px;margin:2px;" class="calc ">8</button>
+        <button onclick="addNum('9')" style="width:50px;height:50px;font-size:18px;margin:2px;" class="calc ">9</button>
+        <button onclick="equals()" style="width:50px;height:50px;font-size:18px;margin:2px;" class="calc ">=</button>
+      </div>
+      <div>
+        <button onclick="handleOperator('×')" style="width:50px;height:50px;font-size:18px;margin:2px;"
+          class="calc ">×</button>
+        <button onclick="handleOperator('÷')" style="width:50px;height:50px;font-size:18px;margin:2px;"
+          class="calc ">÷</button>
+      </div>
+      <div>
+
+        <button onclick="clearAll()" style="width:108px;height:50px;font-size:18px;margin:2px;" class="calc ">C</button>
+        <button onclick="addNum('0')" style="width:50px;height:50px;font-size:18px;margin:2px;" class="calc ">0</button>
+      </div>
+    </div>
+
+    <div class="animcenter">
+      <div class="blog-card">
+        <button type="button" class="expand-btn" aria-expanded="false" aria-controls="more-1" data-target="more-1">
+          <span>Show <b>installation</b></span>
+          <span aria-hidden="true" class="arrow">▼</span>
+        </button>
+        <div class="blog-card-more" id="more-1" role="region" aria-hidden="true">
+          <p>Installation</p>
+          <p>To use it just go to the new webapp 🔥 (you are here yayy!)</p>
+          <br>
+          <p>You can get more information or download the latest release in the <a
+              href="https://github.com/Muaves/lszszv">GitHub
+              repository</a>.</p>
+          <br>
+          <br>
+          <p><b>Note: The calculator under 260px x 483px screen width/height is useless.</b></p>
+
+        </div>
+      </div>
+      <footer style="text-align: center; padding: 12px 0; color: var(--text); font-size: 14px;">
+        <p>© 2026 Muavees. All rights reserved.</p>
+      </footer>
+    </div>
+  </div>
+
+
+  <script defer>
+    /* Számologep Core-ja */
+
+    var currentValue = 0;
+    var storedValue = null;
+    var operator = null;
+    var waitingForNewNumber = false;
+
+    function updateDisplay(value, isError = false) {
+      var display = document.getElementById('display');
+
+      display.classList.remove(
+        'error',
+        'animate__animated',
+        'animate__shakeX'
+      );
+
+      display.innerText = value;
+      display.scrollLeft = display.scrollWidth;
+
+      if (isError) {
+        display.classList.add(
+          'error',
+          'animate__animated',
+          'animate__shakeX'
+        );
+      }
+    }
+
+    function addNum(n) {
+      var display = document.getElementById('display');
+
+      if (waitingForNewNumber) {
+        updateDisplay(n);
+        waitingForNewNumber = false;
+      } else {
+        updateDisplay(display.innerText === '0' ? n : display.innerText + n);
+      }
+    }
+
+    function calculate(a, b, op) {
+      if (op === '+') return a + b;
+      if (op === '-') return a - b;
+      if (op === '×') return a * b;
+      if (op === '÷') return b === 0 ? Infinity : a / b;
+      return b;
+    }
+
+    function handleOperator(nextOp) {
+      var inputValue = parseFloat(document.getElementById('display').innerText);
+
+      if (storedValue === null) {
+        storedValue = inputValue;
+      } else if (operator) {
+        var result = calculate(storedValue, inputValue, operator);
+
+        if (isNaN(result)) {
+          updateDisplay('Error', true);
+          resetCalc();
+          return;
+        }
+
+        if (!isFinite(result)) {
+          updateDisplay('∞', true);
+          resetCalc();
+          return;
+        }
+
+        storedValue = result;
+        updateDisplay(result);
+      }
+
+      operator = nextOp;
+      waitingForNewNumber = true;
+    }
+
+    function equals() {
+      if (operator === null) return;
+
+      var inputValue = parseFloat(document.getElementById('display').innerText);
+      var result = calculate(storedValue, inputValue, operator);
+
+      if (isNaN(result)) {
+        updateDisplay('Error', true);
+      } else if (!isFinite(result)) {
+        updateDisplay('∞', true);
+      } else {
+        updateDisplay(result);
+      }
+
+      resetCalc();
+    }
+
+    function clearAll() {
+      updateDisplay('0');
+      resetCalc();
+    }
+
+    function resetCalc() {
+      storedValue = null;
+      operator = null;
+      waitingForNewNumber = true;
+    }
+
+
+
+    document.addEventListener('click', function (e) {
+      var btn = e.target.closest('.expand-btn');
+      if (!btn) return;
+
+      var targetId = btn.getAttribute('data-target');
+      var more = document.getElementById(targetId);
+      var card = btn.closest('.blog-card');
+      var expanded = btn.getAttribute('aria-expanded') === 'true';
+
+      btn.setAttribute('aria-expanded', String(!expanded));
+      if (more) more.setAttribute('aria-hidden', String(expanded));
+      if (card) card.classList.toggle('expanded', !expanded);
+
+      var label = btn.querySelector('span:first-child');
+      if (label) {
+        label.textContent = expanded ? 'Show installation' : 'Show less';
+      }
+    });
+
+
+
+    (function () {
+      var toggle = document.getElementById('theme-toggle');
+      var darkClass = 'theme-dark';
+
+      function applyTheme(theme) {
+        if (theme === 'dark') {
+          document.body.classList.add(darkClass);
+          toggle.textContent = '☀️';
+        } else {
+          document.body.classList.remove(darkClass);
+          toggle.textContent = '🌙';
+        }
+      }
+
+      var saved = localStorage.getItem('theme');
+      if (!saved) {
+        saved = window.matchMedia('(prefers-color-scheme: dark)').matches
+          ? 'dark'
+          : 'light';
+      }
+
+      applyTheme(saved);
+
+      toggle.addEventListener('click', function () {
+        var next = document.body.classList.contains(darkClass)
+          ? 'light'
+          : 'dark';
+        applyTheme(next);
+        localStorage.setItem('theme', next);
+      });
+    })();
+
+
+    function shakeDisplay() {
+      const display = document.getElementById('display');
+      display.classList.remove('shake');
+      void display.offsetWidth;
+      display.classList.add('shake');
+    }
+
+    function handleResult(result) {
+      const display = document.getElementById('display');
+
+      display.classList.remove('error');
+
+      if (isNaN(result)) {
+        display.textContent = 'Error';
+        display.classList.add('error', 'animate__animated', 'animate__shakeX');
+      } else if (!isFinite(result)) {
+        display.textContent = '∞';
+        display.classList.add('animate__animated', 'animate__shakeX');
+      } else {
+        display.textContent = result;
+      }
+    }
+
+    document.querySelectorAll('.calc').forEach(btn => {
+      btn.addEventListener('click', () => {
+        btn.classList.remove('animate__animated', 'animate__bounceIn');
+
+        void btn.offsetWidth;
+
+        btn.classList.add('animate__animated', 'animate__bounceIn');
+
+        btn.addEventListener('animationend', function handler() {
+          btn.classList.remove('animate__animated', 'animate__bounceIn');
+          btn.removeEventListener('animationend', handler);
+        });
+      });
+    });
+
+
+    document.querySelectorAll('.calc').forEach(btn => {
+      btn.addEventListener('click', () => {
+        if (experimentalAnimations) {
+          btn.classList.remove('animate__animated', 'animate__bounceIn');
+          void btn.offsetWidth; 
+          btn.classList.add('animate__animated', 'animate__bounceIn');
+
+          btn.addEventListener('animationend', function handler() {
+            btn.classList.remove('animate__animated', 'animate__bounceIn');
+            btn.removeEventListener('animationend', handler);
+          });
+
+          btn.style.transform = 'scale(0.9)';
+          setTimeout(() => btn.style.transform = 'scale(1)', 700);
+        } else {
+          btn.style.transform = 'scale(0.9)';
+          setTimeout(() => btn.style.transform = 'scale(1)', 200);
+        }
+      });
+    });
+  </script>
+</body>
+</html>
