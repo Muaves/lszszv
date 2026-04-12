@@ -1,1 +1,296 @@
+  :root {
+      --bg: #ffffff;
+      --text: #0a0a0a;
+      --muted: #333333;
+      --panel: #eeeeee;
+      --border: rgba(0, 0, 0, 0.12);
+      --btn-bg: transparent;
+      --btn-border: rgba(0, 0, 0, 0.12);
+      --panelbg: #e2dada;
+  }
 
+  .theme-dark {
+      --bg: #000000;
+      --text: #fffcfc;
+      --muted: #ffffff;
+      --panel: #f4f4f4;
+      --border: rgba(255, 255, 255, 0.08);
+      --btn-bg: transparent;
+      --btn-border: rgba(255, 255, 255, 0.08);
+      --panelbg: #2d1515ab;
+  }
+
+  body {
+      background: var(--bg);
+      color: var(--text);
+      text-align: center;
+      justify-content: center;
+      transition-duration: 0.5s;
+  }
+
+
+  .error {
+      color: red;
+
+  }
+
+  .shake {
+      animation: shake 0.3s ease;
+  }
+
+  @keyframes shake {
+      0% {
+          transform: translateX(0);
+      }
+
+      20% {
+          transform: translateX(-5px);
+      }
+
+      40% {
+          transform: translateX(5px);
+      }
+
+      60% {
+          transform: translateX(-5px);
+      }
+
+      80% {
+          transform: translateX(5px);
+      }
+
+      100% {
+          transform: translateX(0);
+      }
+  }
+
+
+  .expand-btn {
+      margin-top: 12px;
+      background: var(--btn-bg);
+      border: none;
+      color: var(--text);
+      font-weight: 600;
+      font-size: 14px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+  }
+
+  .expand-btn .arrow {
+      display: inline-block;
+      transition: transform 0.25s ease;
+  }
+
+  .blog-card.expanded .arrow {
+      transform: rotate(180deg);
+  }
+
+  .blog-card-more {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease;
+      margin-top: 12px;
+      background: transparent;
+  }
+
+  .blog-card.expanded .blog-card-more {
+      max-height: 1000px;
+  }
+
+  .blog-card-more p {
+      color: var(--muted);
+      margin-bottom: 8px;
+  }
+
+  .button {
+      position: relative;
+      display: inline-block;
+      margin: 20px;
+  }
+
+  .button a {
+      color: white;
+      font-family: Helvetica, sans-serif;
+      font-weight: bold;
+      font-size: 36px;
+      text-align: center;
+      text-decoration: none;
+      background-color: #FFA12B;
+      display: block;
+      position: relative;
+      padding: 20px 40px;
+
+      -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+      text-shadow: 0px 1px 0px #000;
+      filter: dropshadow(color=#000, offx=0px, offy=1px);
+
+      -webkit-box-shadow: inset 0 1px 0 #FFE5C4, 0 10px 0 #915100;
+      -moz-box-shadow: inset 0 1px 0 #FFE5C4, 0 10px 0 #915100;
+      box-shadow: inset 0 1px 0 #FFE5C4, 0 10px 0 #915100;
+
+      -webkit-border-radius: 5px;
+      -moz-border-radius: 5px;
+      border-radius: 5px;
+  }
+
+  .button a:active {
+      top: 10px;
+      background-color: #F78900;
+
+      -webkit-box-shadow: inset 0 1px 0 #FFE5C4, inset 0 -3px 0 #915100;
+      -moz-box-shadow: inset 0 1px 0 #FFE5C4, inset 0 -3pxpx 0 #915100;
+      box-shadow: inset 0 1px 0 #FFE5C4, inset 0 -3px 0 #915100;
+  }
+
+  .button:after {
+      content: "";
+      height: 100%;
+      width: 100%;
+      padding: 4px;
+      position: absolute;
+      bottom: -15px;
+      left: -4px;
+      z-index: -1;
+      background-color: #2B1800;
+      -webkit-border-radius: 5px;
+      -moz-border-radius: 5px;
+      border-radius: 5px;
+  }
+
+  .more-img {
+      width: 100%;
+      max-width: 600px;
+      display: block;
+      margin: 8px 0;
+      border-radius: 8px;
+  }
+
+  #theme-toggle {
+      background: var(--btn-bg);
+      color: var(--text);
+      border: 1px solid var(--btn-border);
+      padding: 6px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+  }
+
+  .center {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      animation-duration: 2.4s;
+  }
+
+  .animcenter {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin-top: 20px;
+      animation-duration: 2.4s;
+      border-radius: 30px;
+      width: 600px;
+  }
+
+  .calc {
+      transform-style: preserve-3d;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      padding: 12px;
+      border-radius: 20px;
+      cursor: pointer;
+      transition-duration: 0.3s;
+  }
+
+  .calc:hover {
+      transition-duration: 0.3s;
+      transform: scale(1.1);
+  }
+
+  .calc:active {
+      transition-duration: 0.2s;
+      transform: scale(0.9);
+      background-color: rgb(240, 231, 214);
+  }
+
+  .display {
+      transform-style: preserve-3d;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      padding: 12px;
+      border-radius: 20px;
+      transition-duration: 0.3s;
+  }
+
+  #display {
+      overflow-x: auto;
+      white-space: nowrap;
+  }
+
+  .display.error {
+      color: #ff4d4d;
+      border-color: #ff4d4d;
+  }
+
+  .panel {
+      background-color: var(--panelbg);
+      padding: 20px;
+      border-radius: 20px;
+      animation-duration: 0.9s;
+  }
+
+
+
+  .hamburger {
+      position: fixed;
+      top: 12px;
+      left: 12px;
+      width: 24px;
+      height: 18px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      z-index: 9999;
+  }
+
+  .hamburger span {
+      display: block;
+      width: 100%;
+      height: 3px;
+      background: var(--text);
+      border-radius: 2px;
+      pointer-events: none;
+  }
+
+  .hamburger p {
+      position: absolute;
+      top: 22px;
+      left: -10px;
+      font-size: 10px;
+      color: var(--text);
+      opacity: 0;
+  }
+
+  .tooltip {
+      position: absolute;
+      left: 36px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: var(--panel);
+      color: var(--text);
+      padding: 4px 8px;
+      border-radius: 6px;
+      font-size: 12px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+
+  .hamburger:hover .tooltip {
+      opacity: 1;
+      transform: translate(4px, -50%);
+  }
