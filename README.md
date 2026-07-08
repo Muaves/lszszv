@@ -23,7 +23,7 @@ Graceful handling of invalid and undefined results (NaN, Infinity)
 
 Responsive layout with a defined minimum supported viewport
 
-Non-functional hamburger menu placeholder (UI scaffold) 🧩
+Non-functional hamburger menu placeholder (UI scaffold) 
 
 ## Architecture
 
@@ -44,6 +44,14 @@ CSS3 (custom properties for theming)
 Vanilla JavaScript (ES6+)
 
 animate.css (visual feedback only)
+
+## Ideas:
+
+- Creating my own unit of measurement.
+
+- Creating my own language.
+
+- Creating my own temperature scale.
 
 ## Execution
 
@@ -82,7 +90,7 @@ Practicing JavaScript fundamentals
 
 Understanding basic UI state management
 
-Experimenting with animation-driven feedback 🎯
+Experimenting with animation-driven feedback 
 
 It is not intended for production deployment.
 
